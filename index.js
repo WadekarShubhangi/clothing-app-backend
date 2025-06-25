@@ -1,5 +1,5 @@
-const seedProduct = require("./seeds/seedProduct");
-const seedCategory = require("./seeds/seedCategory");
+// const seedProduct = require("./seeds/seedProduct");
+// const seedCategory = require("./seeds/seedCategory");
 
 const Product = require("./models/product.model");
 const Category = require("./models/category.model");
@@ -27,6 +27,7 @@ app.use(express.json());
 
 // seedCategory();
 // seedProduct();
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 async function readAllProducts() {
   try {
