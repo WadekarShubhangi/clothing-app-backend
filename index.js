@@ -1,5 +1,5 @@
 // const seedProduct = require("./seeds/seedProduct");
-// const seedCategory = require("./seeds/seedCategory");
+const seedCategory = require("./seeds/seedCategory");
 
 const Product = require("./models/product.model");
 const Category = require("./models/category.model");
