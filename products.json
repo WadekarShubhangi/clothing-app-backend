@@ -10,7 +10,7 @@
     "discountedPrice": 2000,
     "discount": "50% off",
     "stock": 50,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["S", "M", "L", "XL", "XXL"],
     "colour": ["Black", "Blue"],
     "tags": ["jacket", "hooded", "winter"]
@@ -26,7 +26,7 @@
     "discountedPrice": 999,
     "discount": "38% off",
     "stock": 70,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["M", "L", "XL"],
     "colour": ["White", "Blue"],
     "tags": ["shirt", "casual", "office"]
@@ -42,7 +42,7 @@
     "discountedPrice": 1499,
     "discount": "40% off",
     "stock": 40,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["30", "32", "34", "36"],
     "colour": ["Blue", "Black"],
     "tags": ["jeans", "slimfit", "denim"]
@@ -58,7 +58,7 @@
     "discountedPrice": 599,
     "discount": "33% off",
     "stock": 100,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["S", "M", "L", "XL"],
     "colour": ["Red", "Black"],
     "tags": ["tshirt", "casual", "cotton"]
@@ -74,7 +74,7 @@
     "discountedPrice": 2999,
     "discount": "40% off",
     "stock": 25,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["M", "L", "XL"],
     "colour": ["Blue", "Black"],
     "tags": ["blazer", "formal", "winter"]
@@ -90,7 +90,7 @@
     "discountedPrice": 999,
     "discount": "44% off",
     "stock": 60,
-    "category": "685c0cd91c95d36314e44971",
+    "category": "685e72f7a53a167a472a5e14",
     "size": ["M", "L", "XL"],
     "colour": ["Black", "Grey"],
     "tags": ["trackpants", "gym", "casual"]
@@ -106,7 +106,7 @@
     "discountedPrice": 1299,
     "discount": "41% off",
     "stock": 40,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["S", "M", "L", "XL"],
     "colour": ["Pink", "Red"],
     "tags": ["dress", "party", "flare"]
@@ -122,7 +122,7 @@
     "discountedPrice": 1399,
     "discount": "39% off",
     "stock": 35,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["28", "30", "32", "34"],
     "colour": ["Blue", "Black"],
     "tags": ["jeans", "highwaist", "denim"]
@@ -138,7 +138,7 @@
     "discountedPrice": 899,
     "discount": "40% off",
     "stock": 60,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["S", "M", "L", "XL", "XXL"],
     "colour": ["Green", "Yellow"],
     "tags": ["kurta", "cotton", "ethnic"]
@@ -154,7 +154,7 @@
     "discountedPrice": 1499,
     "discount": "42% off",
     "stock": 40,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["S", "M", "L", "XL"],
     "colour": ["Blue", "Peach"],
     "tags": ["maxi", "dress", "floral"]
@@ -170,7 +170,7 @@
     "discountedPrice": 2099,
     "discount": "40% off",
     "stock": 30,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["S", "M", "L", "XL"],
     "colour": ["Teal", "Beige"],
     "tags": ["kurti", "ethnic", "set"]
@@ -186,7 +186,7 @@
     "discountedPrice": 1099,
     "discount": "35% off",
     "stock": 50,
-    "category": "685c0cdc1c95d36314e44974",
+    "category": "685e72fca53a167a472a5e17",
     "size": ["S", "M", "L", "XL", "XXL"],
     "colour": ["Grey", "Peach"],
     "tags": ["kurti", "long", "dailywear"]
@@ -202,7 +202,7 @@
     "discountedPrice": 799,
     "discount": "38% off",
     "stock": 45,
-    "category": "685c0cdc1c95d36314e44976",
+    "category": "685e72fda53a167a472a5e19",
     "size": ["4Y", "6Y", "8Y", "10Y"],
     "colour": ["Red", "Blue"],
     "tags": ["hoodie", "cartoon", "boys"]
@@ -218,7 +218,7 @@
     "discountedPrice": 749,
     "discount": "38% off",
     "stock": 55,
-    "category": "685c0cdc1c95d36314e44976",
+    "category": "685e72fda53a167a472a5e19",
     "size": ["3Y", "5Y", "7Y", "9Y"],
     "colour": ["Red", "Green"],
     "tags": ["shorts", "tshirt", "kids"]
@@ -234,7 +234,7 @@
     "discountedPrice": 599,
     "discount": "40% off",
     "stock": 40,
-    "category": "685c0cdc1c95d36314e44976",
+    "category": "685e72fda53a167a472a5e19",
     "size": ["3Y", "5Y", "7Y"],
     "colour": ["Blue", "White"],
     "tags": ["tshirt", "polo", "boys"]
@@ -250,7 +250,7 @@
     "discountedPrice": 899,
     "discount": "36% off",
     "stock": 50,
-    "category": "685c0cdc1c95d36314e44976",
+    "category": "685e72fda53a167a472a5e19",
     "size": ["4Y", "6Y", "8Y"],
     "colour": ["Blue", "Grey"],
     "tags": ["jeans", "boys", "casual"]
@@ -266,7 +266,7 @@
     "discountedPrice": 1499,
     "discount": "40% off",
     "stock": 30,
-    "category": "685c0cdc1c95d36314e44978",
+    "category": "685e72fda53a167a472a5e1b",
     "size": ["3Y", "5Y", "7Y", "9Y"],
     "colour": ["Pink", "Purple"],
     "tags": ["gown", "party", "girls"]
@@ -282,7 +282,7 @@
     "discountedPrice": 399,
     "discount": "43% off",
     "stock": 40,
-    "category": "685c0cdc1c95d36314e44978",
+    "category": "685e72fda53a167a472a5e1b",
     "size": ["3Y", "5Y", "7Y"],
     "colour": ["Yellow", "White"],
     "tags": ["tshirt", "girls", "cotton"]
@@ -298,7 +298,7 @@
     "discountedPrice": 799,
     "discount": "33% off",
     "stock": 35,
-    "category": "685c0cdc1c95d36314e44978",
+    "category": "685e72fda53a167a472a5e1b",
     "size": ["2Y", "4Y", "6Y"],
     "colour": ["Pink", "Green"],
     "tags": ["frock", "summer", "girls"]
@@ -314,7 +314,7 @@
     "discountedPrice": 699,
     "discount": "30% off",
     "stock": 45,
-    "category": "685c0cdc1c95d36314e44978",
+    "category": "685e72fda53a167a472a5e1b",
     "size": ["3Y", "5Y", "7Y"],
     "colour": ["Blue", "Black"],
     "tags": ["skirt", "denim", "girls"]
