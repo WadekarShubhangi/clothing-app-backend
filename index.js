@@ -28,8 +28,7 @@ app.use(express.json());
 // seedCategory();
 // seedProduct();
 
-app.get('/favicon.ico', (req, res) => res.status(204).end());
-
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 async function readAllProducts() {
   try {
@@ -122,25 +121,45 @@ app.get("/api/categories/:categoryId", async (req, res) => {
   }
 });
 
-async function addWishlistData(product) {
+async function addWishlistData(productId) {
   try {
-    const newWishlistProduct = new Wishlist(product);
-    const saveWishlist = await newWishlistProduct.save();
-    return saveWishlist;
+    // const newWishlistProduct = new Wishlist(productId);
+    // const saveWishlist = await newWishlistProduct.save();
+    // return saveWishlist;
+    // ===========
+    let wishlist = await Wishlist.findOne(); // single wishlist (for now)
+    if (!wishlist) {
+      wishlist = new Wishlist({ products: [] });
+    }
+
+    const alreadyInWishlist = wishlist.products.includes(productId);
+    if (!alreadyInWishlist) {
+      wishlist.products.push(productId);
+    }
+
+    const saved = await wishlist.save();
+    return await saved.populate("products");
   } catch (error) {
     console.error("Error while saving new product to wishlist:", error.message);
     throw error;
   }
 }
 
-app.post("/api/wishlist/products", async (req, res) => {
- 
+app.post("/api/wishlist", async (req, res) => {
   try {
-    const selectedProducts = await addWishlistData(req.body);
-    if (selectedProducts) {
+    // const selectedProducts = await addWishlistData(req.body);
+    // if (selectedProducts) {
+    //   res.status(200).json({
+    //     message: "Product wishlisted successfully.",
+    //     wishlist: selectedProducts,
+    //   });
+
+    const { productId } = req.body;
+    const updatedWishlist = await addWishlistData(productId);
+    if (updatedWishlist) {
       res.status(200).json({
         message: "Product wishlisted successfully.",
-        wishlist: selectedProducts,
+        data: updatedWishlist,
       });
     } else {
       res.status(404).json({
@@ -241,12 +260,10 @@ app.post("/api/cart", async (req, res) => {
   try {
     const newCartData = await addDataToCart(req.body);
     if (newCartData) {
-      res
-        .status(200)
-        .json({
-          message: "Product Added to cart successfully.",
-          cart: newCartData,
-        });
+      res.status(200).json({
+        message: "Product Added to cart successfully.",
+        cart: newCartData,
+      });
     } else {
       res
         .status(404)
@@ -270,12 +287,10 @@ app.get("/api/cart", async (req, res) => {
   try {
     const cartData = await readAllCartData();
     if (cartData.length != 0) {
-      res
-        .status(200)
-        .json({
-          message: "Product added to cart successfully.",
-          data: { cart: cartData },
-        });
+      res.status(200).json({
+        message: "Product added to cart successfully.",
+        data: { cart: cartData },
+      });
     } else {
       res
         .status(404)
@@ -300,12 +315,10 @@ app.post("/api/orders", async (req, res) => {
   try {
     const selectedOrders = await addOrders(req.body);
     if (selectedOrders) {
-      res
-        .status(200)
-        .json({
-          message: "Orders added successfully.",
-          order: selectedOrders,
-        });
+      res.status(200).json({
+        message: "Orders added successfully.",
+        order: selectedOrders,
+      });
     } else {
       res
         .status(404)
@@ -316,10 +329,11 @@ app.post("/api/orders", async (req, res) => {
   }
 });
 
-
 async function readAllOrders() {
   try {
-    const orderData = await Order.find().populate("products").populate("address")
+    const orderData = await Order.find()
+      .populate("products")
+      .populate("address");
     return orderData;
   } catch (error) {
     throw error;
@@ -330,12 +344,10 @@ app.get("/api/orders", async (req, res) => {
   try {
     const orderData = await readAllOrders();
     if (orderData.length != 0) {
-      res
-        .status(200)
-        .json({
-          message: "Orders",
-          data: { orders: orderData },
-        });
+      res.status(200).json({
+        message: "Orders",
+        data: { orders: orderData },
+      });
     } else {
       res
         .status(404)
