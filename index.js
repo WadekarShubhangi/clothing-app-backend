@@ -160,7 +160,7 @@ app.post("/api/wishlist", async (req, res) => {
 
 async function readAllWishlistProducts() {
   try {
-    const products = await Wishlist.find().populate("products");
+    const products = await Wishlist.findOne().populate("products");
     return products;
   } catch (error) {
     throw error;
@@ -170,7 +170,7 @@ async function readAllWishlistProducts() {
 app.get("/api/wishlist", async (req, res) => {
   try {
     const products = await readAllWishlistProducts();
-    if (products.length != 0) {
+    if (products) {
       res.json({ data: { wishlist: products } });
     } else {
       res.status(404).json({ error: "No Wishlist Product found." });
