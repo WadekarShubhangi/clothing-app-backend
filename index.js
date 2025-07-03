@@ -123,20 +123,14 @@ app.get("/api/categories/:categoryId", async (req, res) => {
 
 async function addWishlistData(productId) {
   try {
-    // const newWishlistProduct = new Wishlist(productId);
-    // const saveWishlist = await newWishlistProduct.save();
-    // return saveWishlist;
-    // ===========
-    let wishlist = await Wishlist.findOne(); // single wishlist (for now)
+    let wishlist = await Wishlist.findOne();
     if (!wishlist) {
       wishlist = new Wishlist({ products: [] });
     }
-
     const alreadyInWishlist = wishlist.products.includes(productId);
     if (!alreadyInWishlist) {
       wishlist.products.push(productId);
     }
-
     const saved = await wishlist.save();
     return await saved.populate("products");
   } catch (error) {
@@ -146,25 +140,17 @@ async function addWishlistData(productId) {
 }
 
 app.post("/api/wishlist", async (req, res) => {
-  try {
-    // const selectedProducts = await addWishlistData(req.body);
-    // if (selectedProducts) {
-    //   res.status(200).json({
-    //     message: "Product wishlisted successfully.",
-    //     wishlist: selectedProducts,
-    //   });
-
-    const { productId } = req.body;
-    const updatedWishlist = await addWishlistData(productId);
+  try { 
+    const updatedWishlist = await addWishlistData(req.body.productId)
     if (updatedWishlist) {
       res.status(200).json({
         message: "Product wishlisted successfully.",
-        data: updatedWishlist,
+        wishlist: updatedWishlist,
       });
     } else {
       res.status(404).json({
         message: "Failed to add product to wishlist.",
-        wishlist: selectedProducts,
+        wishlist: updatedWishlist,
       });
     }
   } catch (error) {
