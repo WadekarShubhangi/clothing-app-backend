@@ -133,7 +133,8 @@ async function addWishlistData(product) {
   }
 }
 
-app.post("/api/wishlist", async (req, res) => {
+app.post("/api/wishlist/products", async (req, res) => {
+ 
   try {
     const selectedProducts = await addWishlistData(req.body);
     if (selectedProducts) {
