@@ -194,7 +194,6 @@ async function deleteWishlistData(productId) {
 
     const saved = await wishlist.save();
     return await saved.populate("products");
-
   } catch (error) {
     console.log(error);
     throw error;
@@ -263,11 +262,22 @@ app.get("/api/address", async (req, res) => {
   }
 });
 
-async function addDataToCart(productData) {
+async function addDataToCart(productId) {
   try {
-    const newCartData = new Cart(productData);
-    const saveCartData = await newCartData.save();
-    return saveCartData;
+    let cart = await Cart.findOne();
+    if (!cart) {
+      cart = new Cart({ products: [] });
+    }
+    const existingProduct = cart.products.find(
+      (p) => p.product.toString() === productId
+    );
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.products.push({ product: productId });
+    }
+    const savedCart = await cart.save();
+    return await savedCart.populate("products.product");
   } catch (error) {
     console.log(error);
     throw error;
@@ -276,7 +286,7 @@ async function addDataToCart(productData) {
 
 app.post("/api/cart", async (req, res) => {
   try {
-    const newCartData = await addDataToCart(req.body);
+    const newCartData = await addDataToCart(req.body.productId);
     if (newCartData) {
       res.status(200).json({
         message: "Product Added to cart successfully.",
