@@ -304,7 +304,7 @@ app.post("/api/cart", async (req, res) => {
 
 async function readAllCartData() {
   try {
-    const cartData = await Cart.find().populate("products.product");
+    const cartData = await Cart.findOne().populate("products.product");
     return cartData;
   } catch (error) {
     throw error;
@@ -314,7 +314,7 @@ async function readAllCartData() {
 app.get("/api/cart", async (req, res) => {
   try {
     const cartData = await readAllCartData();
-    if (cartData.length != 0) {
+    if (cartData) {
       res.status(200).json({
         message: "Product added to cart successfully.",
         data: { cart: cartData },
