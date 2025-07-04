@@ -140,8 +140,8 @@ async function addWishlistData(productId) {
 }
 
 app.post("/api/wishlist", async (req, res) => {
-  try { 
-    const updatedWishlist = await addWishlistData(req.body.productId)
+  try {
+    const updatedWishlist = await addWishlistData(req.body.productId);
     if (updatedWishlist) {
       res.status(200).json({
         message: "Product wishlisted successfully.",
@@ -177,6 +177,38 @@ app.get("/api/wishlist", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch wishlist products." });
+  }
+});
+
+async function deleteWishlistData(productId) {
+  try {
+    // const catchProdId = await Wishlist.findByIdAndDelete(productId)
+    // return catchProdId;
+
+    const wishlist = await Wishlist.findOne();
+    if (!wishlist) return null;
+
+    wishlist.products = wishlist.products.filter(
+      (id) => id.toString() !== productId
+    );
+
+    const saved = await wishlist.save();
+    return await saved.populate("products");
+
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+app.delete("/api/wishlist/:productId", async (req, res) => {
+  try {
+    const deletedProduct = await deleteWishlistData(req.params.productId);
+    if (deletedProduct) {
+      res.status(200).json({ message: "Product deleted successfully." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete Product." });
   }
 });
 
