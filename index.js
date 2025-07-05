@@ -262,6 +262,8 @@ app.get("/api/address", async (req, res) => {
   }
 });
 
+// Cart
+
 async function addDataToCart(productId) {
   try {
     let cart = await Cart.findOne();
@@ -329,6 +331,64 @@ app.get("/api/cart", async (req, res) => {
   }
 });
 
+async function deleteCartData(productId) {
+  try {
+    const cart = await Cart.findOne();
+    if (!cart) return null;
+
+    cart.products = cart.products.filter(
+      (p) => p.product.toString() !== productId
+    );
+
+    const saved = await cart.save();
+    return await saved.populate("products.product");
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+app.delete("/api/cart/:productId", async (req, res) => {
+  try {
+    const deletedProduct = await deleteCartData(req.params.productId);
+    if (deletedProduct) {
+      res.status(200).json({ message: "Product deleted successfully." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete Product." });
+  }
+});
+
+async function updateCartQuantity(productId, action) {
+  try {
+    const cart = await Cart.findOne();
+    if (!cart) return null;
+
+    const item = cart.products.find(
+      (p) => p.product.toString() === productId
+    );
+    if (!item) return null;
+
+    if (action === "increment") {
+      item.quantity += 1;
+    } else if (action === "decrement") {
+      item.quantity -= 1;
+      if (item.quantity < 1) {
+        cart.products = cart.products.filter(
+          (p) => p.product.toString() !== productId
+        );
+      }
+    }
+
+    const savedCart = await cart.save();
+    return await savedCart.populate("products.product");
+  } catch (error) {
+    console.log("Error in updating cart quantity.", error);
+    throw error;
+  }
+}
+
+// Address
 async function addOrders(data) {
   try {
     const newOrder = new Order(data);
