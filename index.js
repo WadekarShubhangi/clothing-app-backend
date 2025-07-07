@@ -270,21 +270,29 @@ async function addDataToCart(productId) {
     if (!cart) {
       cart = new Cart({ products: [] });
     }
+
+    let alreadyExists = false;
+
     const existingProduct = cart.products.find(
       (p) => p.product.toString() === productId
     );
+
     if (existingProduct) {
-      existingProduct.quantity += 1;
+      alreadyExists = true;
     } else {
       cart.products.push({ product: productId });
     }
+
     const savedCart = await cart.save();
-    return await savedCart.populate("products.product");
+    const populatedCart = await savedCart.populate("products.product");
+
+    return { alreadyExists, cart: populatedCart };
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
+
 
 app.post("/api/cart", async (req, res) => {
   try {
@@ -364,9 +372,7 @@ async function updateCartQuantity(productId, action) {
     const cart = await Cart.findOne();
     if (!cart) return null;
 
-    const item = cart.products.find(
-      (p) => p.product.toString() === productId
-    );
+    const item = cart.products.find((p) => p.product.toString() === productId);
     if (!item) return null;
 
     if (action === "increment") {
@@ -404,7 +410,6 @@ app.post("/api/cart/update", async (req, res) => {
     res.status(500).json({ error: "Failed to update cart." });
   }
 });
-
 
 // Address
 async function addOrders(data) {
