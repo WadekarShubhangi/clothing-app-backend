@@ -388,6 +388,24 @@ async function updateCartQuantity(productId, action) {
   }
 }
 
+app.post("/api/cart/update", async (req, res) => {
+  try {
+    const { productId, action } = req.body;
+    const updatedCart = await updateCartQuantity(productId, action);
+    if (updatedCart) {
+      res.status(200).json({
+        message: "Cart updated successfully.",
+        cart: updatedCart,
+      });
+    } else {
+      res.status(404).json({ message: "Product not found in cart." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update cart." });
+  }
+});
+
+
 // Address
 async function addOrders(data) {
   try {
