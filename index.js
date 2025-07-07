@@ -282,10 +282,8 @@ async function addDataToCart(productId) {
     } else {
       cart.products.push({ product: productId });
     }
-
     const savedCart = await cart.save();
     const populatedCart = await savedCart.populate("products.product");
-
     return { alreadyExists, cart: populatedCart };
   } catch (error) {
     console.log(error);
@@ -293,19 +291,23 @@ async function addDataToCart(productId) {
   }
 }
 
-
 app.post("/api/cart", async (req, res) => {
   try {
-    const newCartData = await addDataToCart(req.body.productId);
-    if (newCartData) {
+    const { cart, alreadyExists } = await addDataToCart(req.body.productId);
+    if (cart) {
       res.status(200).json({
-        message: "Product Added to cart successfully.",
-        cart: newCartData,
+        message: "Product added to cart successfully.",
+        alreadyExists,
+        cart,
       });
     } else {
       res
         .status(404)
-        .json({ message: "Failed to add product to cart.", cart: newCartData });
+        .json({
+          message: "Failed to add product to cart.",
+          alreadyExists,
+          cart,
+        });
     }
   } catch (error) {
     res.status(500).json({ error: "Server error." });
