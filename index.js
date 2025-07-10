@@ -260,7 +260,6 @@ app.get("/api/address", async (req, res) => {
   }
 });
 
-
 app.delete("/api/address/:addressId", async (req, res) => {
   try {
     const deletedAddress = await Address.findByIdAndDelete(req.params.addressId);
@@ -275,7 +274,6 @@ app.delete("/api/address/:addressId", async (req, res) => {
 });
 
 // Cart
-
 async function addDataToCart(productId) {
   try {
     let cart = await Cart.findOne();
@@ -455,7 +453,7 @@ app.post("/api/orders", async (req, res) => {
 async function readAllOrders() {
   try {
     const orderData = await Order.find()
-      .populate("products")
+      .populate("items.product")
       .populate("address");
     return orderData;
   } catch (error) {
