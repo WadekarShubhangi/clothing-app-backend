@@ -1,18 +1,14 @@
 // const seedProduct = require("./seeds/seedProduct");
 // const seedCategory = require("./seeds/seedCategory");
-
 const Product = require("./models/product.model");
 const Category = require("./models/category.model");
 const Address = require("./models/address.model");
 const Cart = require("./models/cart.model");
 const Order = require("./models/order.model");
 const Wishlist = require("./models/wishlist.model");
-
 const { initializeDatabase } = require("./db/db.connect");
 initializeDatabase();
-
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -24,12 +20,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
-
 // seedCategory();
 // seedProduct();
-
 app.get("/favicon.ico", (req, res) => res.status(204).end());
 
+// All Products
 async function readAllProducts() {
   try {
     const products = await Product.find().populate("category");
@@ -77,6 +72,7 @@ app.get("/api/products/:prodId", async (req, res) => {
   }
 });
 
+// All Category
 async function readAllCategory() {
   try {
     const category = await Category.find();
@@ -121,6 +117,7 @@ app.get("/api/categories/:categoryId", async (req, res) => {
   }
 });
 
+// Wishlist
 async function addWishlistData(productId) {
   try {
     let wishlist = await Wishlist.findOne();
@@ -211,6 +208,7 @@ app.delete("/api/wishlist/:productId", async (req, res) => {
   }
 });
 
+// Address
 async function addAddress(address) {
   try {
     const newAddress = new Address(address);
@@ -262,6 +260,20 @@ app.get("/api/address", async (req, res) => {
   }
 });
 
+
+app.delete("/api/address/:addressId", async (req, res) => {
+  try {
+    const deletedAddress = await Address.findByIdAndDelete(req.params.addressId);
+    if (deletedAddress) {
+      res.status(200).json({ message: "Address deleted"});
+    } else {
+      res.status(404).json({ error: "Address not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: "Failed to delete address", details: err.message });
+  }
+});
+
 // Cart
 
 async function addDataToCart(productId) {
@@ -301,13 +313,11 @@ app.post("/api/cart", async (req, res) => {
         cart,
       });
     } else {
-      res
-        .status(404)
-        .json({
-          message: "Failed to add product to cart.",
-          alreadyExists,
-          cart,
-        });
+      res.status(404).json({
+        message: "Failed to add product to cart.",
+        alreadyExists,
+        cart,
+      });
     }
   } catch (error) {
     res.status(500).json({ error: "Server error." });
@@ -413,7 +423,7 @@ app.post("/api/cart/update", async (req, res) => {
   }
 });
 
-// Address
+// Orders
 async function addOrders(data) {
   try {
     const newOrder = new Order(data);
