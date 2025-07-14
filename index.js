@@ -284,13 +284,13 @@ async function updateAddress(addressId, dataToUpdate) {
   }
 }
 
-app.post("api/address/:addressId", async (req, res) => {
+app.post("/api/address/:addressId", async (req, res) => {
   try {
-    const updatedAddress = await updateAddress(req.params.addressId, req.body);
-    if (updatedAddress) {
+    const selectedAddress = await updateAddress(req.params.addressId, req.body);
+    if (selectedAddress) {
       res.status(200).json({
         message: "Address updated successfully.",
-        updatedAddress: updatedAddress,
+        updatedAddress: selectedAddress,
       });
     } else {
       res.status(404).json({ error: "Address not found." });
