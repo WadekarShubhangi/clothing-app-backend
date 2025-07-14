@@ -284,7 +284,7 @@ async function updateAddress(addressId, dataToUpdate) {
   }
 }
 
-app.post("/address/:addressId", async (req, res) => {
+app.post("api/address/:addressId", async (req, res) => {
   try {
     const updatedAddress = await updateAddress(req.params.addressId, req.body);
     if (updatedAddress) {
